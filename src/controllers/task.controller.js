@@ -1,5 +1,5 @@
-import Task from "../models/task.models.js";
-import User from "../models/user.models.js";
+import { TaskModel } from "../models/task.model.js";
+import { UserModel } from "../models/user.model.js";
 
 
 export const createTask = async (req, res) => {
@@ -116,11 +116,6 @@ export const updateTaskById = async (req, res) => {
             msg:"No se pudo actualizar la tarea"
         })
     }
-
-
-
-
-
 }
 
 export const deleteTaskById = async (req, res) => {
@@ -141,7 +136,4 @@ export const deleteTaskById = async (req, res) => {
             msg:"No se pudo eliminar la tarea"
         })
     }
-
-
-
 }

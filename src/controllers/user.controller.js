@@ -1,8 +1,7 @@
-import Task from "../models/task.models.js";
-import User from "../models/user.models.js";
+import { TaskModel } from "../models/task.model.js";
+import { UserModel } from "../models/user.model.js";
 
-
-export const createTask = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const { title, description, userId } = req.body;
 
@@ -37,7 +36,7 @@ export const createTask = async (req, res) => {
 };
 
 
-export const getAllTasks = async (req, res) => {
+export const getAllUsers = async (req, res) => {
   try {
     const tasks = await Task.findAll({
       include: {
@@ -58,7 +57,7 @@ export const getAllTasks = async (req, res) => {
 };
 
 
-export const getTaskById = async (req, res) => {
+export const getUserById = async (req, res) => {
   const { id } = req.params;
 
   if (isNaN(id) || Number(id) <= 0) {
@@ -84,7 +83,7 @@ export const getTaskById = async (req, res) => {
     return res.status(500).json({ msg: "Error al obtener la tarea" });
   }
 };
-export const updateTaskById = async (req, res) => {
+export const updateUser = async (req, res) => {
     const {id} = req.params;
     const {title,description} = req.body;
     try {
@@ -123,7 +122,7 @@ export const updateTaskById = async (req, res) => {
 
 }
 
-export const deleteTaskById = async (req, res) => {
+export const deleteUser = async (req, res) => {
     const {id} = req.params;
     try {
         const task = await Task.findByPk(id);

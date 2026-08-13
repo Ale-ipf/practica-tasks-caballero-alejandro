@@ -1,18 +1,44 @@
 import { DataTypes } from "sequelize";
-import { Sequelize } from "../config/database.js";
+import { sequelize } from "../config/database.js";
+//import { PersonModel } from "./person.model.js";
 
-export const UserModel = sequelize.define('User', {
+export const UserModel = sequelize.define(
+  "User",
+  {
+    // Model attributes are defined here
     name: {
-        type: Datatypes.STRING(100),
-        allowNull: false,
-        unique: true,
+      type: DataTypes.STRING(100),
+      allowNull: false,
     },
     email: {
-        tpye: Datatypes.STRING(100),
-        allowNull: false,
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true,
     },
     password: {
-        type: Datatypes.STRING(100),
-        defaultValue: false,
-    },
-});
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },/* 
+    person_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+      references: {
+        model: "People",
+        key: "id",
+      },
+    }, */
+  },
+  {
+    // Other model options go here
+    // createdAt: "created_at",
+    // updatedAt: false,
+    timestamps: false,
+  },
+);
+
+// relaciones
+// relacion uno a uno
+//UserModel.belongsTo(PersonModel, { foreignKey: "person_id", as: "owner" });
+
+//PersonModel.hasOne(UserModel, { foreignKey: "person_id", as: "user" });

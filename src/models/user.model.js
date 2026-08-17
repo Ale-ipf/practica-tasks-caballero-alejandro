@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
 import { ProfileModel } from "./profile.model.js";
+//import { PersonModel } from "./person.model.js";
 
 export const UserModel = sequelize.define(
   "User",
@@ -19,15 +20,6 @@ export const UserModel = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    profile_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
-      references: {
-        model: "Profile",
-        key: "id",
-      },
-    },
   },
   {
     // Other model options go here
@@ -41,5 +33,5 @@ export const UserModel = sequelize.define(
 // relacion uno a uno
 //UserModel.belongsTo(PersonModel, { foreignKey: "person_id", as: "owner" });
 //PersonModel.hasOne(UserModel, { foreignKey: "person_id", as: "user" });
-UserModel.belongsTo(ProfileModel, { foreignKey: "profile_id", as: "owner"});
-ProfileModel.hasOne(UserModel, { foreignKey: "profile_id", as: "user", onDelete: 'CASCADE'});
+UserModel.hasOne(ProfileModel, { foreignKey: "user_id", as: "owner"});
+ProfileModel.belongsTo(UserModel, { foreignKey: "user_id", as: "user", onDelete: 'CASCADE'});

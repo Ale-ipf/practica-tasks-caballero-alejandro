@@ -20,20 +20,17 @@ export const ProfileModel = sequelize.define(
     biografia: {
       type: DataTypes.TEXT
     },
-    profile_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
+      unique: true,/* 
       references: {
-        model: "Profile",
+        model: "Users",
         key: "id",
-        },
+        }, */
         },
       },
       {
-        // Other model options go here
-        // createdAt: "created_at",
-        // updatedAt: false,
         timestamps: false,
       },
     );

@@ -1,0 +1,5 @@
+$kind: http-request
+name: getAllUsers
+url: http://localhost:3001/api/users
+method: GET
+order: 1906160162995778

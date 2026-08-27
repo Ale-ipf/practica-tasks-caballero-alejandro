@@ -3,8 +3,8 @@ import { getAllRanks, getRankById, createRank, deleteRankById, updateRankById } 
 
 export const routesRank = Router();
 
-routesRank.get("/ranks", getAllRanks);
-routesRank.get("/ranks/:id", getRankById); 
-routesRank.post("/ranks", createRank);
-routesRank.put("/ranks/:id", updateRankById);
-routesRank.delete("/ranks/:id", deleteRankById);
+RankRouter.get("/ranks", getAllRanks);
+RankRouter.get("/ranks/:id", getRankById); 
+RankRouter.post("/ranks", createRank);
+RankRouter.put("/ranks/:id", updateRankById);
+RankRouter.delete("/ranks/:id", deleteRankById);

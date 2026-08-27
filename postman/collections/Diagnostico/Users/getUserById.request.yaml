@@ -1,0 +1,5 @@
+$kind: http-request
+name: getUserById
+url: http://localhost:3001/api/users/id
+method: GET
+order: 3940288720055698

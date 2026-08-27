@@ -3,5 +3,5 @@ import { getAllUserRanks, createUserRank } from "../controllers/rank_user.contro
 
 export const routerRankUser = Router();
 
-routerRankUser.get("/user-ranks", getAllUserRanks);
-routerRankUser.post("/user-ranks", createUserRank);
+RankUserRouter.get("/user-ranks", getAllUserRanks);
+RankUserRouter.post("/user-ranks", createUserRank);

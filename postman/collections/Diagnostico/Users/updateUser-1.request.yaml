@@ -1,0 +1,8 @@
+$kind: http-request
+name: updateUser
+url: http://localhost:3001/api/users/id
+method: PUT
+body:
+  type: json
+  content: "{\r\n    name: \"Ale\"\r\n}"
+order: 4501493805047824

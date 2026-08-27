@@ -1,37 +1,16 @@
+import { where } from "sequelize";
 import { TaskModel } from "../models/task.model.js";
 import { UserModel } from "../models/user.model.js";
+import { matchedData } from "express-validator";
 
 export const createUser = async (req, res) => {
   try {
-    const { title, description, userId } = req.body;
-
-    // Validaciones
-    if (!title || title.trim() === "") {
-      return res.status(400).json({ msg: "El título no puede ser nulo" });
-    }
-    if (!description || description.trim() === "") {
-      return res.status(400).json({ msg: "La descripción no puede ser nula" });
-    }
-    if (!userId) {
-      return res.status(400).json({ msg: "La tarea debe estar asociada a un usuario" });
-    }
-
-    // Verificar si el usuario existe
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ msg: "El usuario no existe" });
-    }
-
-    // Crear tarea
-    const task = await Task.create({ title, description, userId });
-
-    return res.status(201).json({
-      msg: "Se ha creado la tarea correctamente",
-      data: task
-    });
+    const validatedData = matchedData(req);
+    const user = await UserModel.create(validatedData);
+    return res.status(201).json(user);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ msg: "Error al crear la tarea" });
+    console.log(error);
+    return res.status(500).json({ message: "Error interno del servidor" });
   }
 };
 
@@ -84,58 +63,38 @@ export const getUserById = async (req, res) => {
   }
 };
 export const updateUser = async (req, res) => {
-    const {id} = req.params;
-    const {title,description} = req.body;
-    try {
-        const task = await Task.findByPk(id);
-        if(!task){
-            return res.status(404).json({
-                msg:"No se encontro la tarea"
-            })
-        }
-        if (title === undefined || title === ""){
-            return res.status(400).json({
-                msg:"Title no puede ser nulo"
-            })
-        };
-        if (description === undefined || description === ""){
-            return res.status(400).json({
-                msg:"Description no puede ser nulo"
-            })
-        };
-        await Task.update({title,description},{where:{id}});
-        return res.status(200).json({
-            msg:"Tarea actualizada correctamente"
-        })
+  try {
+    const validatedDataBody = matchedData(req, {locations:["body"]});
+    const validatedDataParams = matchedData(req, {locations: ["params"]})
 
-
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            msg:"No se pudo actualizar la tarea"
-        })
+    const userExist = await UserModel.findByPk(id)
+    
+    if(!userExist){
+      return res.status(404).json({message: "Usuario no encontrado"})
     }
+    
 
-
-
-
-
+    const user = await UserModel.create(validatedData);
+    console.log(validatedData);
+    return res.status(201).json({message: "Usuario editado correctamente"});
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error interno del servidor" });
+  }
 }
 
 export const deleteUser = async (req, res) => {
     const {id} = req.params;
     try {
-        const task = await Task.findByPk(id);
-        if(!task){
-            return res.status(404).json({
-                msg:"No se encontro la tarea"
-            })
+        const task = await UserModel.findByPk(id);
+        if(!user){
+            return res.status(404).json({message:"No se encontro la tarea"})
         }
-        await Task.destroy({where:{id}});
+        await UserModel.destroy({where:{id}});
         return res.status(200).json({
-            msg:"Tarea eliminada correctamente"})
+            msg:"Usuario eliminado correctamente"})
     } catch (error) {
-        console.log(error);
+        console.log(error);S
         return res.status(500).json({
             msg:"No se pudo eliminar la tarea"
         })

@@ -1,0 +1,5 @@
+$kind: http-request
+name: deleteUser
+url: http://localhost:3001/api/users/id
+method: DELETE
+order: 4503232592820603

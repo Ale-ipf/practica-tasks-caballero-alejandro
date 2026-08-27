@@ -1,0 +1,5 @@
+$kind: http-request
+name: deleteTaskById
+url: http://localhost:3001/api/tasks/id
+method: DELETE
+order: 4310280372786199

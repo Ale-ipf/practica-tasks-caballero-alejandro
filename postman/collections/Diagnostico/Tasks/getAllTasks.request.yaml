@@ -1,0 +1,5 @@
+$kind: http-request
+name: getAllTasks
+url: http://localhost:3001/api/tasks
+method: GET
+order: 30952195045048

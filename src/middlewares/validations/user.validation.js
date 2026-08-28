@@ -11,7 +11,9 @@ export const createUserValidation = [
   body("person_id").notEmpty().withMessage("El person_id no debe ser vacio"),
 ];
 
-const getAllUsersValidation = []
+const getAllUsersValidation = [
+  body("name").notEmpty().withMessage()
+]
 
 const getUserByIdValidation = [
     body("name").opcional().notEmpty().withMessage("El name no debe ser vacio"),
